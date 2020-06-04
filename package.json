@@ -1,0 +1,11 @@
+{
+  "name": "authenticate-it",
+  "version": "1.0.0",
+  "description": "Updated authentication exercise for Codeworks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Amy Kirasack",
+  "license": "ISC"
+}
