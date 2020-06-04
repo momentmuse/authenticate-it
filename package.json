@@ -4,5 +4,8 @@
   "description": "Updated authentication exercise for Codeworks.",
   "scripts": {},
   "author": "Amy Kirasack",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-router-dom": "^5.2.0"
+  }
 }
