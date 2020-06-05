@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import apiService from './../ApiService';
 
 const initialState = {
   email: '',
@@ -14,13 +15,14 @@ const Login = () => {
       ...prevState,
       [name]: value,
     }));
-    console.log(state);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = state;
-    console.log(`YOOO I'm logging in with the ${email} with pass ${password}}`);
+    const user = { email, password };
+    console.log('what is apiservice', apiService);
+    apiService.login(user);
     setState(initialState);
   };
 
@@ -43,7 +45,7 @@ const Login = () => {
           type="password"
           placeholder="supersecretthingy"
           name="password"
-          value={state.name}
+          value={state.password}
           onChange={handleChange}
         />
         <button className="form-submit" type="submit" disabled={validateForm()}>

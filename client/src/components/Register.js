@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import apiService from './../ApiService';
 
 const initialState = {
   email: '',
@@ -16,15 +17,13 @@ const Register = () => {
       ...prevState,
       [name]: value,
     }));
-    console.log(state);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, firstName, lastName } = state;
-    console.log(
-      `eeyyy I'm submitting the ${email} with pass ${password} for ${firstName} ${lastName}`
-    );
+    const user = { email, password, firstName, lastName };
+    apiService.register(user);
     setState(initialState);
   };
 
@@ -51,7 +50,7 @@ const Register = () => {
           type="password"
           placeholder="supersecretthingy"
           name="password"
-          value={state.name}
+          value={state.password}
           onChange={handleChange}
         />
         <input

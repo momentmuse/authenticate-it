@@ -1,10 +1,17 @@
 import React from 'react';
+import apiService from './../ApiService';
+import { Link } from 'react-router-dom';
 
 const Logout = () => {
   return (
     <div>
-      This is the log out page. It should technically redirect to the home page
-      and no longer have a session or JWT, but we'll handle that later
+      <h2>Are you sure you want to log out?</h2>
+      <button onClick={() => apiService.logout({ id: 'test123ID' })}>
+        Yes
+      </button>
+      <Link to="/">
+        <button>No</button>
+      </Link>
     </div>
   );
 };

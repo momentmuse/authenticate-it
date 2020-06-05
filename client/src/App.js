@@ -9,11 +9,11 @@ import Logout from './components/Logout';
 
 import './App.css';
 
-const routes = {
-  public: ['home'],
-  verified: ['profile', 'logout'],
-  unverified: ['register', 'login'],
-};
+// const routes = {
+//   public: ['home'],
+//   verified: ['profile', 'logout'],
+//   unverified: ['register', 'login'],
+// };
 
 function App() {
   return (

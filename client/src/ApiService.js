@@ -2,7 +2,9 @@ const BASE_URL = 'http://localhost:3001';
 
 // possible to refactor into a 'fetch factory' to reduce repetition
 
-const register = (user) => {
+const apiService = {};
+
+apiService.register = (user) => {
   return fetch(`${BASE_URL}/register`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -12,8 +14,9 @@ const register = (user) => {
     .catch((err) => console.log(err));
 };
 
-const login = (user) => {
+apiService.login = (user) => {
   // are these inconsistent paths ok?
+  console.log('hey something login api service running');
   return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -23,7 +26,7 @@ const login = (user) => {
     .catch((err) => console.log(err));
 };
 
-const logout = (user) => {
+apiService.logout = (user) => {
   // do I need to send the user to logout?
   return fetch(`${BASE_URL}/logout`, {
     method: 'POST',
@@ -34,4 +37,4 @@ const logout = (user) => {
     .catch((err) => console.log(err));
 };
 
-export default { register, login, logout };
+export default apiService;
