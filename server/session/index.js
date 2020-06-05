@@ -7,7 +7,12 @@ const SERVER_PORT = process.env.SERVER_PORT || 3001;
 // const SECRET = process.env.SECRET || 'this is not very secure';
 const router = require('./router');
 
-app.use(cors());
+const corsConfig = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(
   session({
@@ -24,7 +29,6 @@ app.use(
     },
   })
 );
-// app.use(auth);
 app.use(router);
 
 app.listen(SERVER_PORT, (err) => {

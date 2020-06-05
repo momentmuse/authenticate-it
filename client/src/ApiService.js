@@ -7,6 +7,8 @@ const apiService = {};
 apiService.profile = () => {
   return fetch(`${BASE_URL}/me`, {
     method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json())
@@ -16,6 +18,8 @@ apiService.profile = () => {
 apiService.register = (user) => {
   return fetch(`${BASE_URL}/register`, {
     method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   })
@@ -26,6 +30,8 @@ apiService.register = (user) => {
 apiService.login = (user) => {
   return fetch(`${BASE_URL}/login`, {
     method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   })
@@ -36,6 +42,8 @@ apiService.login = (user) => {
 apiService.logout = () => {
   return fetch(`${BASE_URL}/logout`, {
     method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json())

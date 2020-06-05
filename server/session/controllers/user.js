@@ -31,6 +31,8 @@ const create = async (req, res) => {
     // the session cookie should be in the client with name 'sid' (see index.js of server)
     // but the cookie doesn't show up in the browser
     req.session.userId = user._id;
+    console.log('whats in the req session id', req.session.id);
+    console.log('whats in the req userID', req.session.userId);
     res.status(201).send(user);
   } catch (error) {
     console.log(error);
