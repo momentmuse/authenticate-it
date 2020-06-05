@@ -1,13 +1,30 @@
 const express = require('express');
 const cors = require('cors');
-const auth = require('./middlewares/auth.js');
+const session = require('express-session');
+// const auth = require('./middlewares/auth.js');
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
+// const SECRET = process.env.SECRET || 'this is not very secure';
 const router = require('./router');
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  session({
+    // the store property, if not specified, defaults to the in-memory store
+    name: 'sid',
+    saveUninitialized: false,
+    resave: false,
+    secret: 'alalal',
+    cookie: {
+      maxAge: 1000 * 60 * 60, // 1hr
+      sameSite: true,
+      // we would want to set it true in a production environment
+      secure: false,
+    },
+  })
+);
 // app.use(auth);
 app.use(router);
 
