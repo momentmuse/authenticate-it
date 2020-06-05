@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-// const auth = require('./middlewares/auth.js');
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3001;

@@ -4,6 +4,15 @@ const BASE_URL = 'http://localhost:3001';
 
 const apiService = {};
 
+apiService.profile = () => {
+  return fetch(`${BASE_URL}/me`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 apiService.register = (user) => {
   return fetch(`${BASE_URL}/register`, {
     method: 'POST',
@@ -15,8 +24,6 @@ apiService.register = (user) => {
 };
 
 apiService.login = (user) => {
-  // are these inconsistent paths ok?
-  console.log('hey something login api service running');
   return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -26,12 +33,10 @@ apiService.login = (user) => {
     .catch((err) => console.log(err));
 };
 
-apiService.logout = (user) => {
-  // do I need to send the user to logout?
+apiService.logout = () => {
   return fetch(`${BASE_URL}/logout`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

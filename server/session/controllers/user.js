@@ -28,6 +28,8 @@ const create = async (req, res) => {
   });
   try {
     const user = await newUser.save();
+    // the session cookie should be in the client with name 'sid' (see index.js of server)
+    // but the cookie doesn't show up in the browser
     req.session.userId = user._id;
     res.status(201).send(user);
   } catch (error) {
@@ -43,6 +45,8 @@ const login = async (req, res) => {
   if (!user) res.status(404).send('User does not exist');
   const validatedPass = await bcrypt.compare(password, user.password);
   if (validatedPass) {
+    // the session cookie should be in the client with name 'sid' (see index.js of server)
+    // but the cookie doesn't show up in the browser
     req.session.userId = user._id;
     console.log('whats in the req session id', req.session.id);
     console.log('whats in the req userID', req.session.userId);
@@ -58,12 +62,13 @@ const logout = (req, res) => {
       console.log('😞 There was an error logging out');
       res.sendStatus(500);
     } else {
+      // the cookie is not clearing properly
+      // if I query the /logout endpoint and then query the /me endpoint, the userdata still logs in the console
       res.clearCookie('sid');
       console.log('🍪 Destroyed the session cookie');
       res.sendStatus(200);
     }
   });
-  console.log(`hey this is LOGOUT! ${req.body.id}`);
 };
 
 module.exports = { profile, create, login, logout };
