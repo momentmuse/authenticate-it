@@ -21,7 +21,6 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    console.log('what is apiservice', apiService);
     apiService.login(user);
     setState(initialState);
   };

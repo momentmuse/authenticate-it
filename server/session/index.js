@@ -8,8 +8,8 @@ const router = require('./router');
 
 app.use(cors());
 app.use(express.json());
-app.use(router);
 // app.use(auth);
+app.use(router);
 
 app.listen(SERVER_PORT, (err) => {
   if (err) {

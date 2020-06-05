@@ -6,7 +6,7 @@ const apiService = {};
 
 apiService.register = (user) => {
   return fetch(`${BASE_URL}/register`, {
-    method: 'PUT',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   })

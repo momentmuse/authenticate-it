@@ -1,46 +1,37 @@
 const bcrypt = require('bcrypt');
 const User = require('./../models/user');
 
-const create = (req, res) => {
+const create = async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
-  bcrypt.hash(password, 10, async (err, hash) => {
-    if (err) {
-      throw new Error(err);
-    } else {
-      const newUser = new User({
-        email,
-        password: hash,
-        firstName,
-        lastName,
-      });
-      try {
-        const user = await newUser.save();
-        res.status(201).send(user);
-      } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
-      }
-    }
+  const user = await User.findOne({ email: email });
+  if (user) res.status(409).send('User already exists');
+  const hash = await bcrypt.hash(password, 10);
+  const newUser = new User({
+    email,
+    password: hash,
+    firstName,
+    lastName,
   });
+  try {
+    const user = await newUser.save();
+    // persist session stuff in cookie
+    res.status(201).send(user);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
-  if (user) {
-    const hash = user.password;
-    bcrypt.compare(password, hash, (err, result) => {
-      if (err) {
-        throw new Error(err);
-      } else {
-        result
-          ? res.status(200).send(user)
-          : res.status(401).send('Passwords do not match');
-        // persist session stuff
-      }
-    });
+  if (!user) res.status(404).send('User does not exist');
+  const validatedPass = await bcrypt.compare(password, user.password);
+  if (validatedPass) {
+    // persist session stuff in cookie
+    res.status(200).send(user);
   } else {
-    res.status(404).send('User does not exist');
+    res.status(401).send('Passwords do not match');
   }
 };
 
