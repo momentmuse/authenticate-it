@@ -3,7 +3,7 @@ const cors = require('cors');
 const auth = require('./middlewares/auth.js');
 
 const app = express();
-const SERVER_PORT = process.env.PORT || 3001;
+const SERVER_PORT = process.env.SERVER_PORT || 3001;
 const router = require('./router');
 
 app.use(cors());
@@ -15,6 +15,6 @@ app.listen(SERVER_PORT, (err) => {
   if (err) {
     console.log(`😞 Sorry, something went wrong! ${err}`);
   } else {
-    console.log(`🦆 Server is listening on port ${SERVER_PORT}!`);
+    console.log(`🚀 Server is listening on port ${SERVER_PORT}!`);
   }
 });
