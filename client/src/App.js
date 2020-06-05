@@ -1,42 +1,32 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
-import Login from './components/Login';
 import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Logout from './components/Logout';
 
 import './App.css';
+
+const routes = {
+  public: ['home'],
+  verified: ['profile', 'logout'],
+  unverified: ['register', 'login'],
+};
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
-          </nav>
-
+          <Navbar />
           <Switch>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/" component={Home} />
           </Switch>
         </div>
       </Router>
