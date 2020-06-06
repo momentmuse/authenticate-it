@@ -9,7 +9,7 @@ mongoose.connect(
     if (err) {
       console.log(`😞 Sorry, something went wrong! ${err}`);
     } else {
-      console.log(`🦆 Database connected @ port ${DB_PORT}!`);
+      console.log(`🦆 Database (sessions) connected @ port ${DB_PORT}!`);
     }
   }
 );
