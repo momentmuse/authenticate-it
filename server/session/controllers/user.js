@@ -39,12 +39,8 @@ const login = async (req, res) => {
 };
 
 const profile = async (req, res) => {
-  // need add middleware with res.locals??
-  // this doesn't work the first time it runs for sure
-  // maybe it's because the User._id is an object??
   console.log(' req session: ', req.session);
   const { uid } = req.session;
-  // WHY userId req.session is undefined??
   console.log('userId from req session: ', uid);
   try {
     console.log('again ', uid);
@@ -61,13 +57,11 @@ const profile = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  // session not properly destroyed -- can still access after calling /logout then calling /me
   req.session.destroy((err) => {
     if (err) {
       console.log('😞 There was an error logging out');
       res.status(500).end();
     } else {
-      // the cookie is deleted properly when you log out
       res.clearCookie('sid');
       console.log('🍪 Destroyed the session cookie');
       res.status(200).end();

@@ -8,8 +8,6 @@ const initialState = {
 const Profile = () => {
   const [state, setState] = useState(initialState);
 
-  // this page doesn't refresh on log out.
-  // add protected routes and try again
   const firstName = state.firstName || 'Missing';
   const lastName = state.lastName || 'No.';
 

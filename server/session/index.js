@@ -24,6 +24,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60, // 1hr
       sameSite: true,
+      httpOnly: false,
       // we would want to set it true in a production environment
       secure: false,
     },
