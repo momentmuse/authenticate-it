@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import apiServiceJWT from './../ApiServiceJWT';
+import apiService from './../ApiService';
 const initialState = {
   firstName: '',
   lastName: '',
 };
-
-// useEffectJWT(() => {
-//   const accessToken = localStorage.getItem('accessToken');
-//   const getProfile = async (accessToken) => {
-//     const userInfo = await apiServiceJWT.profile(accessToken);
-//     if (userInfo) {
-//       const { firstName, lastName } = userInfo;
-//       setState((prevState) => {
-//         return {
-//           ...prevState,
-//           firstName,
-//           lastName,
-//         };
-//       });
-//     } else {
-//       console.log('No user info found 😞');
-//     }
-//   };
-//   console.log('in useEffect ', accessToken);
-//   getProfile(accessToken);
-// }, []);
 
 const Profile = () => {
   const [state, setState] = useState(initialState);
@@ -33,9 +12,8 @@ const Profile = () => {
   const lastName = state.lastName || 'No.';
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    const getProfile = async (accessToken) => {
-      const userInfo = await apiServiceJWT.profile(accessToken);
+    const getProfile = async () => {
+      const userInfo = await apiService.profile();
       if (userInfo) {
         const { firstName, lastName } = userInfo;
         setState((prevState) => {
@@ -49,8 +27,7 @@ const Profile = () => {
         console.log('No user info found 😞');
       }
     };
-    console.log('in useEffect ', accessToken);
-    getProfile(accessToken);
+    getProfile();
   }, []);
 
   return (

@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
-import apiServiceJWT from './../ApiServiceJWT';
+import apiService from './../ApiService';
 
 const initialState = {
   email: '',
   password: '',
 };
-
-// const handleSubmitJWT = async (e) => {
-//   e.preventDefault();
-//   const { email, password } = state;
-//   const user = { email, password };
-//   const { accessToken } = apiServiceJWT.login(user);
-//   localStorage.setItem('accessToken', accessToken);
-//   setState(initialState);
-// };
 
 const Login = () => {
   const [state, setState] = useState(initialState);
@@ -26,12 +17,13 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    const { accessToken } = await apiServiceJWT.login(user);
-    localStorage.setItem('accessToken', accessToken);
+    // this is async.. do I need to await this to make sure it was successful?
+    // I don't need to do anything with the return value though, it just sets the session cookie
+    apiService.login(user);
     setState(initialState);
   };
 
