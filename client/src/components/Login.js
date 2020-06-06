@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import apiService from './../ApiService';
+import apiServiceJWT from './../ApiServiceJWT';
 
 const initialState = {
   email: '',
   password: '',
 };
+
+// const handleSubmitJWT = async (e) => {
+//   e.preventDefault();
+//   const { email, password } = state;
+//   const user = { email, password };
+//   const { accessToken } = apiServiceJWT.login(user);
+//   localStorage.setItem('accessToken', accessToken);
+//   setState(initialState);
+// };
 
 const Login = () => {
   const [state, setState] = useState(initialState);
@@ -17,11 +26,12 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    apiService.login(user);
+    const { accessToken } = await apiServiceJWT.login(user);
+    localStorage.setItem('accessToken', accessToken);
     setState(initialState);
   };
 

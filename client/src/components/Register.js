@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiService from './../ApiService';
+import apiServiceJWT from './../ApiServiceJWT';
 
 const initialState = {
   email: '',
@@ -7,6 +7,15 @@ const initialState = {
   firstName: '',
   lastName: '',
 };
+
+// const handleSubmitJWT = async (e) => {
+//   e.preventDefault();
+//   const { email, password, firstName, lastName } = state;
+//   const user = { email, password, firstName, lastName };
+//   const { accessToken } = await apiServiceJWT.register(user);
+//   localStorage.setItem('accessToken', accessToken);
+//   setState(initialState);
+// };
 
 const Register = () => {
   const [state, setState] = useState(initialState);
@@ -19,11 +28,12 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
-    apiService.register(user);
+    const { accessToken } = await apiServiceJWT.register(user);
+    localStorage.setItem('accessToken', accessToken);
     setState(initialState);
   };
 

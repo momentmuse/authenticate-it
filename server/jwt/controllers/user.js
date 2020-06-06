@@ -17,7 +17,7 @@ const create = async (req, res) => {
     const user = await newUser.save();
     const { _id, firstName, lastName } = user;
     const accessToken = jwt.sign({ _id, firstName, lastName }, SECRET_KEY);
-    res.status(201).send(accessToken);
+    res.status(201).send({ accessToken });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
@@ -32,7 +32,8 @@ const login = async (req, res) => {
   if (validatedPass) {
     const { _id, firstName, lastName } = user;
     const accessToken = jwt.sign({ _id, firstName, lastName }, SECRET_KEY);
-    res.status(200).send(accessToken);
+    console.log('tried to send ', { accessToken });
+    res.status(200).send({ accessToken });
   } else {
     res.status(401).send('Passwords do not match');
   }
