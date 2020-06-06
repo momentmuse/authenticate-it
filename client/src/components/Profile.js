@@ -8,6 +8,8 @@ const initialState = {
 const Profile = () => {
   const [state, setState] = useState(initialState);
 
+  // this page doesn't refresh on log out.
+  // add protected routes and try again
   const firstName = state.firstName || 'Missing';
   const lastName = state.lastName || 'No.';
 
@@ -15,14 +17,18 @@ const Profile = () => {
     const getProfile = async () => {
       const userInfo = await apiService.profile();
       console.log('reply from /me path ', userInfo);
-      const { firstName, lastName } = userInfo;
-      setState((prevState) => {
-        return {
-          ...prevState,
-          firstName,
-          lastName,
-        };
-      });
+      if (userInfo) {
+        const { firstName, lastName } = userInfo;
+        setState((prevState) => {
+          return {
+            ...prevState,
+            firstName,
+            lastName,
+          };
+        });
+      } else {
+        console.log('No user info found 😞');
+      }
     };
     getProfile();
   }, []);
