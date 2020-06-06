@@ -1,10 +1,9 @@
-const authenticate = async (req, res, next) => {
-  // Work in progress...
+const authMiddleware = async (req, res, next) => {
   if (!req.session.userId) {
-    console.log('no userId found in session');
+    console.log('From authMiddleware: no user id in session!');
     return;
   }
   next();
 };
 
-module.exports = authenticate;
+module.exports = authMiddleware;

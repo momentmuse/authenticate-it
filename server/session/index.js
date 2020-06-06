@@ -31,6 +31,9 @@ app.use(
   })
 );
 app.use(router);
+app.get('*', (req, res) => {
+  res.status(404).send('Sorry, not found 😞');
+});
 
 app.listen(SERVER_PORT, (err) => {
   if (err) {
