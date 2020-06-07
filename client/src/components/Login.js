@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import apiService from './../ApiService';
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
 
 const Login = () => {
   const [state, setState] = useState(initialState);
+  const [redirect, setRedirect] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,14 +19,19 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    // REMOVE-START
     e.preventDefault();
     const { email, password } = state;
     const user = { email, password };
-    // this is async.. do I need to await this to make sure it was successful?
-    // I don't need to do anything with the return value though, it just sets the session cookie
-    apiService.login(user);
-    setState(initialState);
+    const res = await apiService.login(user);
+    if (res.error) {
+      alert(`${res.message}`);
+      setState(initialState);
+    } else {
+      setRedirect(true);
+    }
+    // REMOVE-END
   };
 
   const validateForm = () => {
@@ -53,6 +60,7 @@ const Login = () => {
           &nbsp;Login&nbsp;
         </button>
       </form>
+      {redirect && <Redirect to={'/profile'} />}
     </div>
   );
 };

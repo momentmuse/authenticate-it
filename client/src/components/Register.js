@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import apiService from './../ApiService';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
 
 const Register = () => {
   const [state, setState] = useState(initialState);
+  const [redirect, setRedirect] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,11 +22,18 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
+    // REMOVE-START
     e.preventDefault();
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
-    apiService.register(user);
-    setState(initialState);
+    const res = await apiService.register(user);
+    if (res.error) {
+      alert(`${res.message}`);
+      setState(initialState);
+    } else {
+      setRedirect(true);
+    }
+    // REMOVE-END
   };
 
   const validateForm = () => {
@@ -71,6 +80,7 @@ const Register = () => {
           &nbsp;Register&nbsp;
         </button>
       </form>
+      {redirect && <Redirect to={'/profile'} />}
     </div>
   );
 };

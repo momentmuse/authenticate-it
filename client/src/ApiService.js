@@ -5,6 +5,7 @@ const BASE_URL = 'http://localhost:3001';
 const apiService = {};
 
 apiService.register = (user) => {
+  // REMOVE-START
   return fetch(`${BASE_URL}/register`, {
     method: 'POST',
     credentials: 'include',
@@ -14,9 +15,11 @@ apiService.register = (user) => {
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+  // REMOVE-END
 };
 
 apiService.login = (user) => {
+  // REMOVE-START
   // getting this error on the following line:
   // SyntaxError: Unexpected token U in JSON at position 0
   return fetch(`${BASE_URL}/login`, {
@@ -28,9 +31,11 @@ apiService.login = (user) => {
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+  // REMOVE-END
 };
 
 apiService.profile = () => {
+  // REMOVE-START
   return fetch(`${BASE_URL}/me`, {
     method: 'GET',
     credentials: 'include',
@@ -39,9 +44,11 @@ apiService.profile = () => {
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+  // REMOVE-END
 };
 
 apiService.logout = () => {
+  // REMOVE-START
   return fetch(`${BASE_URL}/logout`, {
     method: 'POST',
     credentials: 'include',
@@ -50,6 +57,7 @@ apiService.logout = () => {
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+  // REMOVE-END
 };
 
 export default apiService;
