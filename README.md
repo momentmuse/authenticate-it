@@ -1,4 +1,4 @@
-# Authenticate It! 🔐
+# Authenticate It! Sessions 🔐
 
 ## Learning Objectives
 

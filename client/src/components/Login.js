@@ -9,7 +9,6 @@ const initialState = {
 
 const Login = (props) => {
   const [state, setState] = useState(initialState);
-  const [redirect, setRedirect] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

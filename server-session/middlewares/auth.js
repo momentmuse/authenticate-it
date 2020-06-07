@@ -1,9 +1,16 @@
+const User = require('./../models/user');
+
 const authMiddleware = async (req, res, next) => {
   // REMOVE-START
-  if (!req.session.uid) {
-    return res.sendStatus(403);
+  try {
+    const { uid } = req.session;
+    const user = await User.findOne({ _id: uid });
+    if (!user) throw new Error();
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.sendStatus(401);
   }
-  next();
   // REMOVE-END
 };
 

@@ -26,29 +26,26 @@ const create = async (req, res) => {
 
 const login = async (req, res) => {
   // REMOVE-START
-  const { email, password } = req.body;
-  const user = await User.findOne({ email: email });
-  if (!user)
-    return res.status(404).send({ error, message: 'User does not exist' });
-  const validatedPass = await bcrypt.compare(password, user.password);
-  if (validatedPass) {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    const validatedPass = await bcrypt.compare(password, user.password);
+    if (!validatedPass) throw new Error();
     req.session.uid = user._id;
     res.status(200).send(user);
-  } else {
-    res.status(401).send({ error: '401', message: 'Passwords do not match' });
+  } catch (error) {
+    res
+      .status(401)
+      .send({ error: '401', message: 'Username or password is incorrect' });
   }
   // REMOVE-END
 };
 
 const profile = async (req, res) => {
   // REMOVE-START
-  const { uid } = req.session;
-
   try {
-    const user = await User.findOne(
-      { _id: uid },
-      { firstName: 1, lastName: 1 }
-    );
+    const { _id, firstName, lastName } = req.user;
+    const user = { _id, firstName, lastName };
     res.status(201).send(user);
   } catch {
     res.status(404).send({ error, message: 'User not found' });
