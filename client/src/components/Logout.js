@@ -17,10 +17,12 @@ const Logout = (props) => {
   return (
     <div>
       <h2>Are you sure you want to log out?</h2>
-      <button onClick={() => handleClick()}>Yes</button>
       <Link to="/">
-        <button>No</button>
+        <button className="confirm-btn">No</button>
       </Link>
+      <button className="confirm-btn" onClick={() => handleClick()}>
+        Yes
+      </button>
     </div>
   );
 };

@@ -8,28 +8,30 @@ import Home from './Home';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   return (
-    <Switch>
-      <Route
-        path="/register"
-        render={(props) => (
-          <Register {...props} setIsAuthenticated={setIsAuthenticated} />
-        )}
-      />
-      <Route
-        path="/login"
-        render={(props) => (
-          <Login {...props} setIsAuthenticated={setIsAuthenticated} />
-        )}
-      />
-      <Route path="/profile" component={Profile} />
-      <Route
-        path="/logout"
-        render={(props) => (
-          <Logout {...props} setIsAuthenticated={setIsAuthenticated} />
-        )}
-      />
-      <Route path="/" component={Home} />
-    </Switch>
+    <div className="dashboard">
+      <Switch>
+        <Route
+          path="/register"
+          render={(props) => (
+            <Register {...props} setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+        <Route
+          path="/login"
+          render={(props) => (
+            <Login {...props} setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+        <Route path="/profile" component={Profile} />
+        <Route
+          path="/logout"
+          render={(props) => (
+            <Logout {...props} setIsAuthenticated={setIsAuthenticated} />
+          )}
+        />
+        <Route path="/" component={Home} />
+      </Switch>
+    </div>
   );
 };
 

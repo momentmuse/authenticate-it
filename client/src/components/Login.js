@@ -20,7 +20,7 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic to send the state through the API service /login
+    // Add logic to send a request to API service /login
     // REMOVE-START
     const { email, password } = state;
     const user = { email, password };
@@ -39,7 +39,7 @@ const Login = (props) => {
   };
 
   const validateForm = () => {
-    return !(state.email || state.password);
+    return !state.email || !state.password;
   };
 
   return (
