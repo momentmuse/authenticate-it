@@ -32,9 +32,10 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>
-        Welcome Back, {firstName} {lastName}
-      </h2>
+      <h2>My Profile</h2>
+      <h3>
+        Welcome back, {firstName} {lastName}!
+      </h3>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
+// REMOVE-START
 const User = require('./../models/user');
+// REMOVE-END
 
 const create = async (req, res) => {
   // REMOVE-START

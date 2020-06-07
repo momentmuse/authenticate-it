@@ -22,7 +22,7 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic to send the state through the API service /register
+    // Add logic to send send a request to the API service /register
     // REMOVE-START
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
@@ -51,6 +51,7 @@ const Register = (props) => {
 
   return (
     <div>
+      <h2>Register</h2>
       <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"

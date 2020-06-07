@@ -8,6 +8,8 @@ This is the master branch, in which you will implement session-based authenticat
 
 ## Getting Started
 
+Install dependencies with `npm i` in both the client and server folders. You'll also want to use Nodemon to easily monitor your server. You will also need to have `mongodb` up and running at the default port.
+
 Most of the client side as well as the server is already set up for you. 🚀
 
 On the server side, you will need to implement authentication middleware and the logic for the controllers. It's possible to implement sessions manually, but we recommend using the `express-session` library for this exercise. You should store the user id in the request session so that each authenticated request will have access to the user id through a cookie.
@@ -18,7 +20,9 @@ The `/me` and `/logout` routes should be protected by an auth middleware; that i
 
 ## Requirements
 
-Install dependencies with `npm i` in both the client and server folders. You'll also want to use Nodemon to easily monitor your server. You will also need to have `mongodb` up and running at the default port.
+A user should be able to register with email, password, first name and last name. If the email already exists, the client should alert the user and prompt them to try to register again. There should also be a similar alert if the user tries to sign in with an incorrect email or password.
+
+Upon successfully registering or logging in, the user should be redirected to the profile page. Logging out should destroy the session and redirect the user to the homepage. 🏠
 
 ## Extra Credit
 

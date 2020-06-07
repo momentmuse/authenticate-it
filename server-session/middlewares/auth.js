@@ -1,4 +1,6 @@
+// REMOVE-START
 const User = require('./../models/user');
+// REMOVE-END
 
 const authMiddleware = async (req, res, next) => {
   // REMOVE-START
