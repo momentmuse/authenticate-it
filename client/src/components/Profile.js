@@ -34,7 +34,7 @@ const Profile = () => {
     <div>
       <h2>My Profile</h2>
       <h3>
-        Welcome back, {firstName} {lastName}!
+        Welcome back, {firstName} {lastName}! Everything is fine.
       </h3>
     </div>
   );

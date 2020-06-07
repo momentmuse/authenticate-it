@@ -20,6 +20,8 @@ The `/me` and `/logout` routes should be protected by an auth middleware; that i
 
 ## Requirements
 
+![Authenticate it (sessions) login page](auth-it-ses.jpg)
+
 A user should be able to register with email, password, first name and last name. If the email already exists, the client should alert the user and prompt them to try to register again. There should also be a similar alert if the user tries to sign in with an incorrect email or password.
 
 Upon successfully registering or logging in, the user should be redirected to the profile page. Logging out should destroy the session and redirect the user to the homepage. 🏠
