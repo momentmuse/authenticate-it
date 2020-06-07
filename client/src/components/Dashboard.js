@@ -6,13 +6,28 @@ import Profile from './Profile';
 import Logout from './Logout';
 import Home from './Home';
 
-const Dashboard = () => {
+const Dashboard = ({ setIsAuthenticated }) => {
   return (
     <Switch>
-      <Route path="/register" component={Register} />
-      <Route path="/login" component={Login} />
+      <Route
+        path="/register"
+        render={(props) => (
+          <Register {...props} setIsAuthenticated={setIsAuthenticated} />
+        )}
+      />
+      <Route
+        path="/login"
+        render={(props) => (
+          <Login {...props} setIsAuthenticated={setIsAuthenticated} />
+        )}
+      />
       <Route path="/profile" component={Profile} />
-      <Route path="/logout" component={Logout} />
+      <Route
+        path="/logout"
+        render={(props) => (
+          <Logout {...props} setIsAuthenticated={setIsAuthenticated} />
+        )}
+      />
       <Route path="/" component={Home} />
     </Switch>
   );

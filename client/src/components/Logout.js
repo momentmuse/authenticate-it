@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import auth from '../utils/auth';
 import apiService from './../ApiService';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Logout = () => {
-  // TODO: add session cookie to React Context
-  const [redirect, setRedirect] = useState(false);
-
-  const logout = () => {
+const Logout = (props) => {
+  const handleClick = () => {
     apiService.logout();
-    setRedirect(true);
+    handleAuth();
+  };
+
+  const handleAuth = () => {
+    props.setIsAuthenticated(false);
+    auth.logout(() => props.history.push('/'));
   };
 
   return (
     <div>
       <h2>Are you sure you want to log out?</h2>
-      <button onClick={() => logout()}>Yes</button>
+      <button onClick={() => handleClick()}>Yes</button>
       <Link to="/">
         <button>No</button>
       </Link>
-      {redirect && <Redirect to={'/'} />}
     </div>
   );
 };

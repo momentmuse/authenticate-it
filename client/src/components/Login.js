@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import auth from '../utils/auth';
 import apiService from './../ApiService';
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
   password: '',
 };
 
-const Login = () => {
+const Login = (props) => {
   const [state, setState] = useState(initialState);
   const [redirect, setRedirect] = useState(false);
 
@@ -20,8 +20,9 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    // REMOVE-START
     e.preventDefault();
+    // Add logic to send the state through the API service /login
+    // REMOVE-START
     const { email, password } = state;
     const user = { email, password };
     const res = await apiService.login(user);
@@ -29,7 +30,11 @@ const Login = () => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      setRedirect(true);
+      // REMOVE-END
+      // This sets isAuthenticated = true and redirects to profile
+      props.setIsAuthenticated(true);
+      auth.login(() => props.history.push('/profile'));
+      // REMOVE-START
     }
     // REMOVE-END
   };
@@ -60,7 +65,6 @@ const Login = () => {
           &nbsp;Login&nbsp;
         </button>
       </form>
-      {redirect && <Redirect to={'/profile'} />}
     </div>
   );
 };

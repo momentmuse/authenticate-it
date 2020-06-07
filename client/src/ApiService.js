@@ -20,8 +20,6 @@ apiService.register = (user) => {
 
 apiService.login = (user) => {
   // REMOVE-START
-  // getting this error on the following line:
-  // SyntaxError: Unexpected token U in JSON at position 0
   return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     credentials: 'include',

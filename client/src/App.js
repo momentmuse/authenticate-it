@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import auth from './utils/auth';
 import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
 
 import './App.css';
 
-// const routes = {
-//   public: ['home'],
-//   verified: ['profile', 'logout'],
-//   unverified: ['register', 'login'],
-// };
-
-// const initialState = document.cookie.slice(0, 3) === 'sid';
-
 function App() {
+  const initialState = auth.isAuthenticated();
+  const [isAuthenticated, setIsAuthenticated] = useState(initialState);
+
   return (
     <div className="App">
       <Router>
-        <Navbar />
-        <Dashboard />
+        <Navbar isAuthenticated={isAuthenticated} />
+        <Dashboard setIsAuthenticated={setIsAuthenticated} />
       </Router>
     </div>
   );

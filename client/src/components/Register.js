@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import auth from '../utils/auth';
 import apiService from './../ApiService';
 
 const initialState = {
@@ -9,9 +9,8 @@ const initialState = {
   lastName: '',
 };
 
-const Register = () => {
+const Register = (props) => {
   const [state, setState] = useState(initialState);
-  const [redirect, setRedirect] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +21,9 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    // REMOVE-START
     e.preventDefault();
+    // Add logic to send the state through the API service /register
+    // REMOVE-START
     const { email, password, firstName, lastName } = state;
     const user = { email, password, firstName, lastName };
     const res = await apiService.register(user);
@@ -31,7 +31,11 @@ const Register = () => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      setRedirect(true);
+      // REMOVE-END
+      // This sets isAuthenticated = true and redirects to profile
+      props.setIsAuthenticated(true);
+      auth.login(() => props.history.push('/profile'));
+      // REMOVE-START
     }
     // REMOVE-END
   };
@@ -80,7 +84,6 @@ const Register = () => {
           &nbsp;Register&nbsp;
         </button>
       </form>
-      {redirect && <Redirect to={'/profile'} />}
     </div>
   );
 };

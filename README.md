@@ -22,6 +22,4 @@ Install dependencies with `npm i` in both the client and server folders. You'll 
 
 ## Extra Credit
 
-- At the moment, all routes are being displayed on the client-side (register, login, profile, logout) regardless of whether the user is authenticated or not. Add conditional protected routes to prevent an authenticated user from seeing the 'register' and 'login' routes, and a non-authenticated user from seeing the 'profile' and 'logout' routes. Observe how with SPAs, client-side routing and server-side routing are decoupled.
-
 - Note that by default, `express-session` saves the session in an in-memory store. This is only approriate for development environments and deployed applications should use session store like `connect-redis` or a separate database. Try to refactor your server to persist sessions in a [session store](https://www.npmjs.com/package/express-session#compatible-session-stores). 🥞
