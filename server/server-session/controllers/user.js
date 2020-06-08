@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
 // REMOVE-START
+const bcrypt = require('bcrypt');
 const User = require('./../models/user');
 // REMOVE-END
 

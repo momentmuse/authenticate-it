@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
-
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
+// REMOVE-START
+const session = require('express-session');
 const SECRET = process.env.SECRET || 'this is not very secure';
+// REMOVE-END
 const router = require('./router');
 
 const corsConfig = {
@@ -28,7 +29,7 @@ app.use(
       maxAge: 1000 * 60 * 60, // 1hr
       sameSite: true,
       httpOnly: false,
-      // we would want to set it true in a production environment
+      // we would want to set secure=true in a production environment
       secure: false,
     },
   })
